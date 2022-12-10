@@ -5,15 +5,12 @@
   env = { HELLO = "WORLD"; };
 
   # https://devenv.sh/packages/
-  packages = with pkgs; [ python310Packages.pytest_6 ];
+  packages = with pkgs; [ python310Packages.pytest_6 watchexec ];
 
   enterShell = "";
 
   # https://devenv.sh/languages/
   languages.python.enable = true;
-
-  # https://devenv.sh/scripts/
-  scripts.watch.exec = "";
 
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks = {
@@ -23,7 +20,13 @@
     black.enable = true;
   };
 
-  # https://devenv.sh/processes/
-  # processes.ping.exec = "ping example.com";
+  # https://devenv.sh/scripts/
+  scripts.test.exec = ''
+    watchexec -r -w src -i=src/__pycache__/* -c -- pytest
+  '';
+  scripts.run.exec = ''
+    watchexec -r -w src -i=src/__pycache__/* -i=src/test_* -- python src/solution.py
+  '';
+
   devcontainer.enable = true;
 }
