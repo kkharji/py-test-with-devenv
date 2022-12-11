@@ -1,6 +1,6 @@
 # Getting started
 
-1. Install devenv `nix-env -if https:// github.com/cachix/devenv/tarball/v0.4`
+1. Install devenv `nix-env -if https://github.com/cachix/devenv/tarball/v0.4`
 2. Allow direnv `direnv allow` (must install direnv)
 3. wait .... :p
 4. Open two terminal/tabs
